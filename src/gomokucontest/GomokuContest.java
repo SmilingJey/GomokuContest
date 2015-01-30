@@ -22,44 +22,39 @@ public class GomokuContest extends javax.swing.JFrame {
         });
     }
     
+    private static final File ADDONS_MODULES = new File(".");
+    private static String FILE_PROTOCOL_PREFIX = "file:";
     private LinkedList<EngineConf> engines = new LinkedList<EngineConf>();
     public static GomokuContest instance;
-    public Xoxopanel xoxopanel = null;
+    public GobanPanel gobanPanel = null;
     public int n = 15;
 
     private GomokuContest() {
         initComponents();
-
-        xoxopanel = new Xoxopanel(n);
+        setSize(490, 400);
+        gobanPanel = new GobanPanel(15);
         setIconImage(new ImageIcon(this.getClass().getResource("icon.png")).getImage());
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         Dimension frameSize = this.getSize();
-        if (frameSize.height > screenSize.height) {
-            frameSize.height = screenSize.height;
-        }
-        if (frameSize.width > screenSize.width) {
-            frameSize.width = screenSize.width;
-        }
-        setLocation((screenSize.width - frameSize.width) / 2,
-                (screenSize.height - frameSize.height) / 2);
-        add(xoxopanel, BorderLayout.CENTER);
-        setSize(490, 400);
+        setLocation((screenSize.width - frameSize.width) / 2,(screenSize.height - frameSize.height) / 2);
+        add(gobanPanel, BorderLayout.CENTER);
+        
         loadEngine();
         for(int i=0;i<engines.size();i++){
             jComboBox1.addItem(engines.get(i));
             jComboBox3.addItem(engines.get(i));
         }
         if (jComboBox3.getItemCount()>1) jComboBox3.setSelectedIndex(1);
-        xoxopanel.new_game();
-        xoxopanel.play1_win = 0;
-        xoxopanel.play2_win = 0;
-        xoxopanel.play1 = jComboBox1.getSelectedItem().toString();
-        xoxopanel.play2 = jComboBox3.getSelectedItem().toString();
-        xoxopanel.games_count = Integer.parseInt(jTextField1.getText());
-        jProgressBar1.setMaximum(xoxopanel.games_count);
-        if (jComboBox1.getSelectedIndex()>0) xoxopanel.xoxo1=((EngineConf)jComboBox1.getSelectedItem()).createEngine();
-        if (jComboBox3.getSelectedIndex()>0) xoxopanel.xoxo2=((EngineConf)jComboBox3.getSelectedItem()).createEngine();
-        xoxopanel.start_game();
+        gobanPanel.new_game();
+        gobanPanel.play1_win = 0;
+        gobanPanel.play2_win = 0;
+        gobanPanel.play1 = jComboBox1.getSelectedItem().toString();
+        gobanPanel.play2 = jComboBox3.getSelectedItem().toString();
+        gobanPanel.games_count = Integer.parseInt(jTextField1.getText());
+        jProgressBar1.setMaximum(gobanPanel.games_count);
+        if (jComboBox1.getSelectedIndex()>0) gobanPanel.xoxo1=((EngineConf)jComboBox1.getSelectedItem()).createEngine();
+        if (jComboBox3.getSelectedIndex()>0) gobanPanel.xoxo2=((EngineConf)jComboBox3.getSelectedItem()).createEngine();
+        gobanPanel.start_game();
     }
 
     public static GomokuContest getInstance() {
@@ -103,15 +98,15 @@ public class GomokuContest extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("Player 1 (x):");
+        jLabel1.setText("BLACK:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Человек" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Human" }));
 
-        jLabel2.setText("Player 2 (o):");
+        jLabel2.setText("WHITE:");
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Человек" }));
+        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Human" }));
 
-        jButton4.setText("Start game");
+        jButton4.setText("Start games");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
@@ -190,19 +185,19 @@ public class GomokuContest extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        xoxopanel.new_game();
+        gobanPanel.new_game();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        xoxopanel.play1_win = 0;
-        xoxopanel.play2_win = 0;
-        xoxopanel.play1 = jComboBox1.getSelectedItem().toString();
-        xoxopanel.play2 = jComboBox3.getSelectedItem().toString();
-        xoxopanel.games_count = Integer.parseInt(jTextField1.getText());
-        jProgressBar1.setMaximum(xoxopanel.games_count);
-        if (jComboBox1.getSelectedIndex()>0) xoxopanel.xoxo1=((EngineConf)jComboBox1.getSelectedItem()).createEngine();
-        if (jComboBox3.getSelectedIndex()>0) xoxopanel.xoxo2=((EngineConf)jComboBox3.getSelectedItem()).createEngine();
-        xoxopanel.start_game();
+        gobanPanel.play1_win = 0;
+        gobanPanel.play2_win = 0;
+        gobanPanel.play1 = jComboBox1.getSelectedItem().toString();
+        gobanPanel.play2 = jComboBox3.getSelectedItem().toString();
+        gobanPanel.games_count = Integer.parseInt(jTextField1.getText());
+        jProgressBar1.setMaximum(gobanPanel.games_count);
+        if (jComboBox1.getSelectedIndex()>0) gobanPanel.xoxo1=((EngineConf)jComboBox1.getSelectedItem()).createEngine();
+        if (jComboBox3.getSelectedIndex()>0) gobanPanel.xoxo2=((EngineConf)jComboBox3.getSelectedItem()).createEngine();
+        gobanPanel.start_game();
     }//GEN-LAST:event_jButton4ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -231,9 +226,6 @@ public class GomokuContest extends javax.swing.JFrame {
     private void loadEngine() {
         loadModules(ADDONS_MODULES);
     }
-
-    private static final File ADDONS_MODULES = new File(".");
-    private static String FILE_PROTOCOL_PREFIX = "file:";
 
     public void loadModules(File MODULES_DIR) {
         //System.out.println("Загрузка алгоритмов из " + MODULES_DIR.getAbsolutePath());
@@ -295,5 +287,122 @@ public class GomokuContest extends javax.swing.JFrame {
         if (file.isFile()){
             engines.add(new EngineConf(file));
         }
+    }
+    
+    public int isGameEnd() {
+        boolean end = false;
+
+        boolean gobamIsFill = true;
+        for (int i = 0; i < gobanPanel.getGobanSize(); i++) {
+            for (int j = 0; j < gobanPanel.getGobanSize(); j++) {
+                if (gobanPanel.goban[i][j] == 0) {
+                    gobamIsFill = false;
+                    break;
+                }
+            }
+            if (gobamIsFill == false) {
+                break;
+            }
+        }
+
+        if (gobamIsFill) {
+            return 3;
+        }
+
+        if (check5inLine(GobanPanel.WHITE)) {
+            return GobanPanel.WHITE;
+        }
+        if (check5inLine(GobanPanel.BLACK)) {
+            return GobanPanel.BLACK;
+        }
+        return 0;
+    }
+
+    private boolean check5inLine(int c) {
+        int len;
+        //проверка по i (по столбцам)
+        for (int i = 0; i < gobanPanel.getGobanSize(); i++) {
+            len = 0;
+            for (int j = 0; j < gobanPanel.getGobanSize(); j++) {
+                if (gobanPanel.goban[i][j] == c) {
+                    len++;
+                } else {
+                    len = 0;
+                }
+                if (len == 5) {
+                    return true;
+                }
+            }
+        }
+        //проверка по j	(по строкам)
+        for (int j = 0; j < gobanPanel.getGobanSize(); j++) {
+            len = 0;
+            for (int i = 0; i < gobanPanel.getGobanSize(); i++) {
+                if (gobanPanel.goban[i][j] == c) {
+                    len++;
+                } else {
+                    len = 0;
+                }
+                if (len == 5) {
+                    return true;
+                }
+            }
+        }
+        //прверка по диагонали j++  i++
+        for (int k = 0; k < gobanPanel.getGobanSize() - 3; k++) {
+            len = 0;
+            for (int j = k, i = 0; i < gobanPanel.getGobanSize() && j < gobanPanel.getGobanSize(); j++, i++) {
+                if (gobanPanel.goban[i][j] == c) {
+                    len++;
+                } else {
+                    len = 0;
+                }
+                if (len == 5) {
+                    return true;
+                }
+            }
+        }
+        for (int k = 0; k < gobanPanel.getGobanSize() - 3; k++) {
+            len = 0;
+            for (int j = 0, i = k; i < gobanPanel.getGobanSize(); j++, i++) {
+                if (gobanPanel.goban[i][j] == c) {
+                    len++;
+                } else {
+                    len = 0;
+                }
+                if (len == 5) {
+                    return true;
+                }
+            }
+        }
+        //проверка по диагонали i++  j--
+        for (int k = 4; k < gobanPanel.getGobanSize(); k++) {
+            len = 0;
+            for (int i = k, j = 0; i >= 0; i--, j++) {
+                if (gobanPanel.goban[i][j] == c) {
+                    len++;
+                } else {
+                    len = 0;
+                }
+                if (len == 5) {
+                    return true;
+                }
+            }
+        }
+        for (int k = 1; k < gobanPanel.getGobanSize() - 3; k++) {
+            len = 0;
+            for (int i = k, j = gobanPanel.getGobanSize() - 1; i < gobanPanel.getGobanSize(); j--, i++) {
+                if (gobanPanel.goban[i][j] == c) {
+                    len++;
+                } else {
+                    len = 0;
+                }
+                if (len == 5) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 }

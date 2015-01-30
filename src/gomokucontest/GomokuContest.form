@@ -115,35 +115,35 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Player 1 (x):"/>
+            <Property name="text" type="java.lang.String" value="BLACK:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JComboBox" name="jComboBox1">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="1">
-                <StringItem index="0" value="&#x427;&#x435;&#x43b;&#x43e;&#x432;&#x435;&#x43a;"/>
+                <StringItem index="0" value="Human"/>
               </StringArray>
             </Property>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Player 2 (o):"/>
+            <Property name="text" type="java.lang.String" value="WHITE:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JComboBox" name="jComboBox3">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="1">
-                <StringItem index="0" value="&#x427;&#x435;&#x43b;&#x43e;&#x432;&#x435;&#x43a;"/>
+                <StringItem index="0" value="Human"/>
               </StringArray>
             </Property>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="jButton4">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Start game"/>
+            <Property name="text" type="java.lang.String" value="Start games"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton4ActionPerformed"/>
