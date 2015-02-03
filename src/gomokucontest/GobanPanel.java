@@ -59,7 +59,7 @@ public class GobanPanel extends JPanel {
         }
         goban = new int[size][size];
         gobanHistory = new int[size][size];
-       
+
         this.addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent me) {
                 if (playerWHITEhuman || playerBLACKhuman) {
@@ -186,10 +186,10 @@ public class GobanPanel extends JPanel {
     }
 
     private void drawBoard(Graphics2D g) {
-        if (GomokuContest.getInstance().whiteBoard()){
+        if (GomokuContest.getInstance().whiteBoard()) {
             g.setColor(Color.WHITE);
             g.fillRect(0, 0, this.getWidth(), this.getHeight());
-        }else{
+        } else {
             g.setPaint(slatetp);
             g.fillRect(0, 0, getWidth(), getHeight());
         }
@@ -209,14 +209,14 @@ public class GobanPanel extends JPanel {
         }
 
         g.fillOval(offset + cellSize * (gobanSize - 1) / 2 - pointSize / 2, offset + cellSize * (gobanSize - 1) / 2 - pointSize / 2, pointSize, pointSize);
-        //g.fillOval(offset + cellSize * (gobanSize - 1) / 2 - pointSize / 2, offset + cellSize * (gobanSize - 4) - pointSize / 2, pointSize, pointSize);
-        //g.fillOval(offset + cellSize * (gobanSize - 1) / 2 - pointSize / 2, offset + cellSize * 3 - pointSize / 2, pointSize, pointSize);
         g.fillOval(offset + cellSize * 3 - pointSize / 2, offset + cellSize * 3 - pointSize / 2, pointSize, pointSize);
-        //g.fillOval(offset + cellSize * 3 - pointSize / 2, offset + cellSize * (gobanSize - 1) / 2 - pointSize / 2, pointSize, pointSize);
-        //g.fillOval(offset + cellSize * (gobanSize - 4) - pointSize / 2, offset + cellSize * (gobanSize - 1) / 2 - pointSize / 2, pointSize, pointSize);
         g.fillOval(offset + cellSize * 3 - pointSize / 2, offset + cellSize * (gobanSize - 4) - pointSize / 2, pointSize, pointSize);
         g.fillOval(offset + cellSize * (gobanSize - 4) - pointSize / 2, offset + cellSize * 3 - pointSize / 2, pointSize, pointSize);
         g.fillOval(offset + cellSize * (gobanSize - 4) - pointSize / 2, offset + cellSize * (gobanSize - 4) - pointSize / 2, pointSize, pointSize);
+        g.fillOval(offset + cellSize * 3 - pointSize / 2, offset + cellSize * (gobanSize - 1) / 2 - pointSize / 2, pointSize, pointSize);
+        g.fillOval(offset + cellSize * (gobanSize - 4) - pointSize / 2, offset + cellSize * (gobanSize - 1) / 2 - pointSize / 2, pointSize, pointSize);
+        g.fillOval(offset + cellSize * (gobanSize - 1) / 2 - pointSize / 2, offset + cellSize * (gobanSize - 4) - pointSize / 2, pointSize, pointSize);
+        g.fillOval(offset + cellSize * (gobanSize - 1) / 2 - pointSize / 2, offset + cellSize * 3 - pointSize / 2, pointSize, pointSize);
     }
 
     private void drawStones(Graphics2D g) {
@@ -226,27 +226,27 @@ public class GobanPanel extends JPanel {
             g.setColor(Color.RED);
             g.fillOval(offset + cellSize * lasti - cellSize / 2, offset + cellSize * (gobanSize - lastj - 1) - cellSize / 2, cellSize, cellSize);
         }
-        
-        if (GomokuContest.getInstance().showHistory()){
+
+        if (GomokuContest.getInstance().showHistory()) {
             for (int i = 0; i < gobanSize; i++) {
                 for (int j = 0; j < gobanSize; j++) {
                     if (goban[i][j] == WHITE) {
-                         g.setColor(whiteStoneColor);
-                         g.fillOval(offset + cellSize * i - stoneSize / 2, offset + cellSize * (gobanSize - j - 1) - stoneSize / 2, stoneSize, stoneSize);
-                         g.setColor(Color.BLACK);
-                         g.drawOval(offset + cellSize * i - stoneSize / 2, offset + cellSize * (gobanSize - j - 1) - stoneSize / 2, stoneSize, stoneSize);
-                         int w = (int)(g.getFont().getStringBounds(Integer.toString(gobanHistory[i][j]), g.getFontRenderContext()).getWidth()/2);
-                         g.drawString(Integer.toString(gobanHistory[i][j]), offset + cellSize * i - w, offset + cellSize * (gobanSize - j - 1) + 5);
+                        g.setColor(whiteStoneColor);
+                        g.fillOval(offset + cellSize * i - stoneSize / 2, offset + cellSize * (gobanSize - j - 1) - stoneSize / 2, stoneSize, stoneSize);
+                        g.setColor(Color.BLACK);
+                        g.drawOval(offset + cellSize * i - stoneSize / 2, offset + cellSize * (gobanSize - j - 1) - stoneSize / 2, stoneSize, stoneSize);
+                        int w = (int) (g.getFont().getStringBounds(Integer.toString(gobanHistory[i][j]), g.getFontRenderContext()).getWidth() / 2);
+                        g.drawString(Integer.toString(gobanHistory[i][j]), offset + cellSize * i - w, offset + cellSize * (gobanSize - j - 1) + 5);
                     } else if (goban[i][j] == BLACK) {
-                         g.setColor(blackStoneColor);
-                         g.fillOval(offset + cellSize * i - stoneSize / 2, offset + cellSize * (gobanSize - j - 1) - stoneSize / 2, stoneSize, stoneSize);
-                         g.setColor(Color.WHITE);
-                         int w = (int)(g.getFont().getStringBounds(Integer.toString(gobanHistory[i][j]), g.getFontRenderContext()).getWidth()/2);
-                         g.drawString(Integer.toString(gobanHistory[i][j]), offset + cellSize * i - w, offset + cellSize * (gobanSize - j - 1) + 5);
+                        g.setColor(blackStoneColor);
+                        g.fillOval(offset + cellSize * i - stoneSize / 2, offset + cellSize * (gobanSize - j - 1) - stoneSize / 2, stoneSize, stoneSize);
+                        g.setColor(Color.WHITE);
+                        int w = (int) (g.getFont().getStringBounds(Integer.toString(gobanHistory[i][j]), g.getFontRenderContext()).getWidth() / 2);
+                        g.drawString(Integer.toString(gobanHistory[i][j]), offset + cellSize * i - w, offset + cellSize * (gobanSize - j - 1) + 5);
                     }
                 }
-            }            
-        }else{
+            }
+        } else {
             for (int i = 0; i < gobanSize; i++) {
                 for (int j = 0; j < gobanSize; j++) {
                     if (goban[i][j] == WHITE) {
@@ -257,7 +257,7 @@ public class GobanPanel extends JPanel {
                                 offset + cellSize * (gobanSize - j - 1) - stoneSize / 2, stoneSize, stoneSize, null);
                     }
                 }
-            }            
+            }
         }
     }
 
@@ -274,7 +274,7 @@ public class GobanPanel extends JPanel {
             } else {
                 s = "BOARD FILL";
             }
-            g.drawString(s, offset + gobanSize*cellSize/2 - 145, offset + gobanSize*cellSize / 2 + 15);
+            g.drawString(s, offset + gobanSize * cellSize / 2 - 145, offset + gobanSize * cellSize / 2 + 15);
             g.setFont(f);
         }
     }
