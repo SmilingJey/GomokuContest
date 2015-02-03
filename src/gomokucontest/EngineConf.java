@@ -7,14 +7,11 @@ import org.w3c.dom.Document;
 
 public class EngineConf {
 
-    public String engineName = "";
-    public String engineClass = "";
-    public String engineDesc = "";
-    public String engineAuthor = "";
-    public String engineVersion = "";
-
-    public EngineConf() {
-    }
+    private String engineName = "";
+    private String engineClass = "";
+    private String engineDesc = "";
+    private String engineAuthor = "";
+    private String engineVersion = "";
 
     public EngineConf(File file) {
         try {
@@ -27,8 +24,8 @@ public class EngineConf {
             engineAuthor = doc.getElementsByTagName("Author").item(0).getTextContent();
             engineVersion = doc.getElementsByTagName("Version").item(0).getTextContent();
             System.out.println("Load engine: " + engineName + ". Main class: " + engineClass);
-        } catch (Exception ex) {
-            System.out.println("Error engine load: " + file.getPath() + ", error: " + ex.getMessage());
+        } catch (Exception e) {
+            System.out.println("Error load engine: " + file.getPath() + ", error: " + e.getMessage());
         }
     }
 
@@ -38,12 +35,13 @@ public class EngineConf {
     }
 
     public IGomokuEngine createEngine() {
-        IGomokuEngine o=null;
+        IGomokuEngine engine = null;
         try {
-            o = (IGomokuEngine)Class.forName(engineClass).newInstance();
-        } catch (Exception ex) {
-            System.out.println("Error engine create: "+engineName+", error "+ex.getMessage());
+            engine = (IGomokuEngine)Class.forName(engineClass).newInstance();
+            engine.init(GomokuContest.getInstance().gobanPanel);
+        } catch (Exception e) {
+            System.out.println("Error create engine: "+engineName);
         }
-        return o;
+        return engine;
     }
 }

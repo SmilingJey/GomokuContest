@@ -1,10 +1,9 @@
 package gomokucontest;
 
 public interface IGomokuEngine {
-    /**
-     * Place a cross or a toe
-     * @param xo - who made a move? 1-x, 2-o
-     */
 
-    public void doMove(byte xo);
+    public void init(GobanPanel gbanPanel);
+    public void doMove(int stoneColor);
+    public void gameStart();
+    public void gameEnd(boolean win);
 }
