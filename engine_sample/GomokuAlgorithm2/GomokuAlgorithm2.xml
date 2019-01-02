@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="windows-1251"?>
+<root>
+    <Name>GomokuAlgorithm2</Name>
+    <Class>gomokualgorithm.GomokuAlgorithm2</Class>
+    <Desc>Алгоритм на основе ценовой матрицы c другими коэффициентами чем в Xoxo1</Desc>
+    <Author>StarJedy</Author>
+    <Version>1.0</Version>
+</root>
